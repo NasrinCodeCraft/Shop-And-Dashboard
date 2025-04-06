@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { enTofa } from "../../../../utils/Utilities";
 
 export default async function ProductDetail({params}) {
 
-    const {id} = params;
+    const {id} = await params;
     const res = await fetch(`http://localhost:3000/api/products/${id}`)
     const mainProduct = await res.json()
 
@@ -15,6 +16,9 @@ export default async function ProductDetail({params}) {
 
                 <div className="new-product-info">
                     <h1 className="new-product-title">{mainProduct.title}</h1>
+                    <span>دسته بندی: </span>
+                    <Link href={`/products?category=${mainProduct.category}`}>{mainProduct.category}</Link>
+                    <br /><br />
                     <p className="new-product-description">{mainProduct.description}</p>
                     <div className="product-price-row">
                         <div className="product-price">{enTofa(mainProduct.price)}</div>
