@@ -1,18 +1,10 @@
 import { enTofa } from "../../../../utils/Utilities";
 
-const products = [
-    {id: 1, title: "محصول 1", price: "3000000", image: "/images/1.jpg"},
-    {id: 2, title: "محصول 2", price: "550000", image: "/images/2.jpg"},
-    {id: 3, title: "محصول 3", price: "1000000", image: "/images/3.jpg"},
-    {id: 4, title: "محصول 4", price: "150000", image: "/images/1.jpg"},
-]
-
-export default function ProductDetail({params}) {
+export default async function ProductDetail({params}) {
 
     const {id} = params;
-    const mainProduct = products.find(
-        (item)=> item.id == id
-    )
+    const res = await fetch(`http://localhost:3000/api/products/${id}`)
+    const mainProduct = await res.json()
 
     return(
         <div className="product-detail">

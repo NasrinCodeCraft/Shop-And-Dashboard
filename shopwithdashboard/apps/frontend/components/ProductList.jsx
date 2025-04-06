@@ -1,15 +1,14 @@
 import ProductBox from "./ProductBox";
 
-export default function ProductList({products}) {
-
+export default function ProductList({products}){
     return(
         <div className="products-grid">
             {
-                products.length > 0 && 
+                products.length > 0 &&
                 products.map(
-                    (product)=> <ProductBox product={product} key={product.id} />
+                    (product)=> <ProductBox product={product} key={product._id}/>
                 )
-            }
+             }
         </div>
     )
 }

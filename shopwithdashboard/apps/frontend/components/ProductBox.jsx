@@ -6,12 +6,14 @@ export default function ProductBox ({product}) {
 
     return(
         <div className="product-wrapper">
-            <div className="product-image-box">
-                <Image width={150} height={150} src={product.image} alt={product.title}/>
-            </div>
+            <Link href={`products/${product._id}`}>
+                <div className="product-image-box">
+                    <Image width={150} height={150} src={product.image} alt={product.title}/>
+                </div>
+            </Link>
 
             <div className="product-info-box">
-                <Link href={`products/${product.id}`}>
+                <Link href={`products/${product._id}`}>
                     <div className="product-title">{product.title}</div>
                 </Link>
                 <div className="product-price-row">
