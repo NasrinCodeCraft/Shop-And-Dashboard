@@ -1,29 +1,25 @@
+"use client"
+
 import Image from "next/image"
 import { enTofa } from "../../../utils/Utilities"
+import { useContext } from "react"
+import { CartContext } from "../../../contexts/CartCantext"
+import TrashIcon from "../../../components/icons/Trash"
 
-const products = [
-    {id: 1, title: "محصول 1", price: "3000000", image: "/images/1.jpg"},
-    {id: 2, title: "محصول 2", price: "550000", image: "/images/2.jpg"},
-    {id: 3, title: "محصول 3", price: "1000000", image: "/images/3.jpg"},
-    {id: 4, title: "محصول 4", price: "150000", image: "/images/1.jpg"},
-]
 
 export default function Cart() {
 
-    let totalPrice = 0
-    products.forEach(
-        (product) => totalPrice += Number(product.price)
-    )
+    let {cart, removeFromCart, updateQuantity, getTotal} = useContext(CartContext)
 
     return(
         <div className="cart-grid">
             <div className="cart-box">
                 <h2>سبد خرید</h2>
 
-                {products.length == 0 && <div>سبد خرید خالی است</div>}
+                {cart.length == 0 && <div>سبد خرید خالی است</div>}
 
                 {
-                    products.length > 0 && (
+                    cart.length > 0 && (
                         <table className="cart-table">
                             <thead>
                                 <tr>
@@ -34,12 +30,15 @@ export default function Cart() {
 
                             <tbody>
                                 {
-                                    products.map(
+                                    cart.map(
                                         (product) => (
-                                            <tr key={product.id}>
+                                            <tr key={product._id}>
                                                 <td className="cart-product">
                                                     <Image src={product.image} alt={product.title} width={80} height={50}
                                                     className="cart-product-image"/>
+                                                    <input type="number" value={product.quantity} min="1"
+                                                    onChange={()=>updateQuantity(product._id, Number(event.target.value))}/>
+                                                    <button onClick={()=> removeFromCart(product._id)}><TrashIcon/></button>
                                                     {product.title}
                                                 </td>
 
@@ -51,7 +50,7 @@ export default function Cart() {
 
                                 <tr>
                                     <td>مجموع</td>
-                                    <td>{enTofa(totalPrice)}</td>
+                                    <td>{enTofa(getTotal())}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -60,7 +59,7 @@ export default function Cart() {
             </div>
 
             {
-                products.length > 0 && (
+                cart.length > 0 && (
                     <div className="cart-box">
                         <h2 className="cart-title">اطلاعات شما</h2>
                         <form className="cart-form">
