@@ -1,5 +1,6 @@
 import { FiEdit, FiTrash2 } from "react-icons/fi"
 import Product from "../../../models/Product"
+import Link from "next/link"
 
 
 export default async function Products(){
@@ -10,7 +11,9 @@ export default async function Products(){
     return(
       <div>
         <h1>This is products page</h1>
-        <button>Add new product</button>
+        <Link href={"/products/new"}>
+          <button>Add new product</button>
+        </Link>
 
         <table>
           <thead>
