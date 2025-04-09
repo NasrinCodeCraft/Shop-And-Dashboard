@@ -2,6 +2,21 @@ import { NextResponse } from "next/server";
 import { connectedToDatabase } from "../../../../../lib/mongodb";
 import Product from "../../../../../models/Product";
 
+export async function GET(req, {params}){
+    try{
+        await connectedToDatabase()
+        const {id} = params
+        const product = await Product.findById(id)
+        if(!product){
+            return NextResponse.json({status:404})
+        }
+        
+        return NextResponse.json({product},{status:200})
+    } 
+    catch(error){
+        return NextResponse.json({status:500})
+    }
+}
 
 export async function DELETE(req, {params}){
     try{
@@ -18,4 +33,23 @@ export async function DELETE(req, {params}){
     catch(error){
         return NextResponse.json({status:500})
     }
-} 
+}
+
+export async function PUT(req, {params}){
+    try{
+        await connectedToDatabase()
+        const {id} = params
+        const data = await req.json()
+        const product = Product.findById(id)
+
+        if(!product){
+            return NextResponse.json({status:404})
+        }
+
+        Object.assign(product, data)
+        await product.save()
+        return NextResponse.json({status:200})
+    } catch(error){
+        return NextResponse.json({status:500})
+    }
+}
