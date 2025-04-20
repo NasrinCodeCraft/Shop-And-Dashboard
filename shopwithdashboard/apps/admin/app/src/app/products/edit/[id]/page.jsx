@@ -49,6 +49,7 @@ export default function EditProduct(){
 
     return(
         <div>
+            <h1>Edit the product below</h1>
             <form onSubmit={handleSubmit}>
                 <input value={formData.title} onChange={handleChange} type="text" name="title" placeholder="title" />
                 <input value={formData.image} onChange={handleChange} type="text" name="image" placeholder="image url" />

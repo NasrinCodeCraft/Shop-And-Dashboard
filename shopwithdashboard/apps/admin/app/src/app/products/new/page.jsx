@@ -37,6 +37,7 @@ export default function NewProduct(){
     return(
         <div>
             <form onSubmit={handleSubmit}>
+                <h1>Add New Product</h1>
                 <input onChange={handleChange} type="text" name="title" placeholder="title" />
                 <input onChange={handleChange} type="number" name="price" placeholder="price" />
                 <input onChange={handleChange} type="text" name="image" placeholder="image url" />
