@@ -6,6 +6,7 @@ export default async function LatestProducts({searchParams}){
     const category = searchParams?.category
 
     const url = category ?
+    // add HOST_URL
      process.env.HOST_URL+`/api/products?category=${category}`:
      process.env.HOST_URL+"/api/products"
 

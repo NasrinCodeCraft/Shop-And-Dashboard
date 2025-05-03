@@ -34,6 +34,7 @@ export default function Cart() {
         } 
 
         try{
+            // add HOST_URL
             const res = await fetch(process.env.HOST_URL+"/api/orders", {
                method: "POST",
                headers: {"Content-Type": "application/json"},
