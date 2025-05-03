@@ -10,7 +10,7 @@ import TrashIcon from "../../../components/icons/Trash"
 export default function Cart() {
 
     let {cart, removeFromCart, updateQuantity, getTotal, clearCart} = useContext(CartContext)
-
+    console.log("cart",cart)
     const [userInfo, setUserInfo] = useState({
         name: "",
         email: "",
@@ -34,7 +34,7 @@ export default function Cart() {
         } 
 
         try{
-            const res = await fetch("http://localhost:3000/api/orders", {
+            const res = await fetch(process.env.HOST_URL+"/api/orders", {
                method: "POST",
                headers: {"Content-Type": "application/json"},
                body: JSON.stringify(orderData) 

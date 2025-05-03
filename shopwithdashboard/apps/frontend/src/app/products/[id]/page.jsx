@@ -4,7 +4,7 @@ import { enTofa } from "../../../../utils/Utilities";
 export default async function ProductDetail({params}) {
 
     const {id} = await params;
-    const res = await fetch(`http://localhost:3000/api/products/${id}`)
+    const res = await fetch(process.env.HOST_URL+`/api/products/${id}`)
     const mainProduct = await res.json()
 
     return(
